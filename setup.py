@@ -19,7 +19,7 @@ requirements = [
     'tldextract',
     'nltk',
     'anyio',
-    'fileio',
+    'file-io',
 ]
 
 args = {
