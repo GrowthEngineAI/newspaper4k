@@ -32,12 +32,18 @@ class InterceptHandler(logging.Handler):
         30: 'WARNING',
         20: 'INFO',
         10: 'DEBUG',
+        5: 'CRITICAL',
+        4: 'ERROR',
+        3: 'WARNING',
+        2: 'INFO',
+        1: 'DEBUG',
         0: 'NOTSET',
     }
     def emit(self, record):
         try:
             level = logger.level(record.levelname).name
-        except AttributeError:
+        #except AttributeError:
+        except ValueError:
             level = self.loglevel_mapping[record.levelno]
         frame, depth = logging.currentframe(), 2
         while frame.f_code.co_filename == logging.__file__:
