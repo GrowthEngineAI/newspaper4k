@@ -26,6 +26,7 @@ args = {
     'packages': find_packages(include = ['newz', 'newz.*']),
     'install_requires': requirements,
     'include_package_data': True,
+    'zip_safe': False,
     'long_description': root.joinpath('README.md').read_text(encoding='utf-8'),
     'entry_points': {
         "console_scripts": [
