@@ -10,7 +10,8 @@ from typing import List, Union, Callable, Coroutine, Any
 from .helpers import is_coro_func
 
 class Executor:
-    pool: futures.ThreadPoolExecutor = None
+    #pool: futures.ThreadPoolExecutor = None
+    pool: futures.ProcessPoolExecutor = None
 
     @staticmethod
     def is_coro(func: Union[Callable, Coroutine, Any], func_name: str = None) -> bool:
@@ -19,10 +20,11 @@ class Executor:
     @classmethod
     def init_pool(cls):
         if cls.pool: return
-        cls.pool = futures.ThreadPoolExecutor(max_workers = 8)
+        cls.pool = futures.ProcessPoolExecutor(max_workers = 8)
+        #cls.pool = futures.ThreadPoolExecutor(max_workers = 8)
     
     @classmethod
-    def get_pool(cls) -> futures.ThreadPoolExecutor:
+    def get_pool(cls) -> futures.ProcessPoolExecutor: # futures.ThreadPoolExecutor:
         cls.init_pool()
         return cls.pool
 

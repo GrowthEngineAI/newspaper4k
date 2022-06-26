@@ -10,7 +10,7 @@ import traceback
 import asyncio
 
 from threading import Thread
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from .article import AsyncArticle
 from .configuration import Configuration
 
@@ -138,7 +138,10 @@ class AsyncNewsPool(object):
 
         timeout = self.config.thread_timeout_seconds
         #self.pool = ThreadPool(num_threads, timeout)
-        self.pool = ThreadPoolExecutor(num_threads)
+        #self.pool = ThreadPoolExecutor(num_threads)
+        # ProcessPool is faster than ThreadPool
+        self.pool = ProcessPoolExecutor(num_threads)
+        
         loop = asyncio.get_running_loop()
 
         for news_object in news_list:
